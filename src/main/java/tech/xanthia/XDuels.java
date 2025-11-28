@@ -78,76 +78,34 @@ public final class XDuels extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        
-        // Initialize logger adapter
-        this.loggerAdapter = new LoggerAdapter(this);
-        
-        // Initialize async executor
-        this.asyncExecutor = Executors.newFixedThreadPool(4, r -> {
-            Thread thread = new Thread(r);
-            thread.setName("xDuels-Async-" + ASYNC_THREAD_COUNTER.incrementAndGet());
-            thread.setDaemon(true);
-            return thread;
-        });
-        
-        getLogger().info("========================================");
-        getLogger().info("  xDuels v" + getPluginMeta().getVersion());
-        getLogger().info("  Initializing systems...");
-        getLogger().info("========================================");
-        
+        logBanner("Boot Sequence");
 
-        saveDefaultConfig();
-        
         try {
-            // Initialize managers in dependency order
-            getLogger().info("Initializing Arena System...");
-            regenManager = new ArenaRegenerationManager(this);
-            arenaManager = new ArenaManager(this, regenManager);
-            arenaManager.initialize();
-            
-            getLogger().info("Initializing Kit System...");
-            kitManager = new KitManager(this);
-            kitManager.initialize();
-            
-            getLogger().info("Initializing Party System...");
-            partyManager = new PartyManager(this);
-            partyManager.initialize();
-            
-            getLogger().info("Initializing Stats & ELO System...");
-            statsManager = new StatsManager(this);
-            eloManager = new EloManager(this, statsManager);
-            
-            getLogger().info("Initializing Duel Engine...");
-            duelManager = new DuelManager(this, arenaManager, kitManager, partyManager);
-            spectatorManager = new DuelSpectatorManager(this, duelManager);
-            duelManager.setSpectatorManager(spectatorManager); // Link spectator manager
-            
-            getLogger().info("Initializing Queue System...");
-            queueManager = new QueueManager(this, partyManager);
-            queueManager.initialize();
-            
-            // Register all event listeners
+            initializeLogger();
+            initializeAsyncExecutor();
+
+            saveDefaultConfig();
+
+            initializeArenaSystem();
+            initializeKitSystem();
+            initializePartySystem();
+            initializeStatsSystem();
+            initializeDuelEngine();
+            initializeQueueSystem();
+
             registerListeners();
             registerCommands();
-            
-            getLogger().info("========================================");
-            getLogger().info("  ✓ xDuels enabled successfully!");
-            getLogger().info("========================================");
-            
+
+            logStartupSuccess();
         } catch (Exception e) {
-            getLogger().severe("========================================");
-            getLogger().severe("  ✗ FATAL ERROR DURING STARTUP");
-            getLogger().severe("========================================");
-            e.printStackTrace();
+            logStartupFailure(e);
             getServer().getPluginManager().disablePlugin(this);
         }
     }
     
     @Override
     public void onDisable() {
-        getLogger().info("========================================");
-        getLogger().info("  Shutting down xDuels...");
-        getLogger().info("========================================");
+        logBanner("Shutdown Sequence");
         
         try {
             // Shutdown managers in reverse order
@@ -193,35 +151,114 @@ public final class XDuels extends JavaPlugin {
         }
     }
     
+    private void initializeLogger() {
+        this.loggerAdapter = new LoggerAdapter(this);
+        getLogger().info("[Bootstrap] Logger adapter online");
+    }
+
+    private void initializeAsyncExecutor() {
+        this.asyncExecutor = Executors.newFixedThreadPool(4, r -> {
+            Thread thread = new Thread(r);
+            thread.setName("xDuels-Async-" + ASYNC_THREAD_COUNTER.incrementAndGet());
+            thread.setDaemon(true);
+            return thread;
+        });
+        getLogger().info("[Bootstrap] Async executor ready (4 threads)");
+    }
+
+    private void initializeArenaSystem() {
+        getLogger().info("[Bootstrap] Initializing Arena System");
+        regenManager = new ArenaRegenerationManager(this);
+        arenaManager = new ArenaManager(this, regenManager);
+        arenaManager.initialize();
+    }
+
+    private void initializeKitSystem() {
+        getLogger().info("[Bootstrap] Initializing Kit System");
+        kitManager = new KitManager(this);
+        kitManager.initialize();
+    }
+
+    private void initializePartySystem() {
+        getLogger().info("[Bootstrap] Initializing Party System");
+        partyManager = new PartyManager(this);
+        partyManager.initialize();
+    }
+
+    private void initializeStatsSystem() {
+        getLogger().info("[Bootstrap] Initializing Stats & ELO System");
+        statsManager = new StatsManager(this);
+        eloManager = new EloManager(this, statsManager);
+    }
+
+    private void initializeDuelEngine() {
+        getLogger().info("[Bootstrap] Initializing Duel Engine");
+        duelManager = new DuelManager(this, arenaManager, kitManager, partyManager);
+        spectatorManager = new DuelSpectatorManager(this, duelManager);
+        duelManager.setSpectatorManager(spectatorManager);
+    }
+
+    private void initializeQueueSystem() {
+        getLogger().info("[Bootstrap] Initializing Queue System");
+        queueManager = new QueueManager(this, partyManager);
+        queueManager.initialize();
+    }
+
+    private void logBanner(String phase) {
+        getLogger().info("========================================");
+        getLogger().info("  xDuels v" + getDescription().getVersion());
+        getLogger().info("  Phase: " + phase);
+        getLogger().info("  Server: " + getServer().getName() + " " + getServer().getBukkitVersion());
+        getLogger().info("========================================");
+    }
+
+    private void logStartupSuccess() {
+        getLogger().info("========================================");
+        getLogger().info("  ✓ xDuels enabled successfully!");
+        getLogger().info("========================================");
+    }
+
+    private void logStartupFailure(Exception e) {
+        getLogger().severe("========================================");
+        getLogger().severe("  ✗ FATAL ERROR DURING STARTUP");
+        getLogger().severe("========================================");
+        getLogger().severe(e.getMessage());
+        e.printStackTrace();
+    }
+    
     /**
      * Registers all event listeners.
      */
     private void registerListeners() {
-        getLogger().info("Registering event listeners...");
-        
+        getLogger().info("[Bootstrap] Registering event listeners");
+
         var pm = getServer().getPluginManager();
-        
-        // Duel Engine listeners
+        int registered = 0;
+
         pm.registerEvents(new DuelCombatListener(duelManager, getLogger()), this);
+        registered++;
         pm.registerEvents(new DuelMovementListener(duelManager, getLogger()), this);
+        registered++;
         pm.registerEvents(new DuelBlockListener(duelManager, getLogger()), this);
+        registered++;
         pm.registerEvents(new DuelInventoryListener(duelManager, spectatorManager, getLogger()), this);
-        
-        // Arena GUI & editor listeners
+        registered++;
+
         pm.registerEvents(new ArenaGUIListener(this), this);
+        registered++;
         pm.registerEvents(new ArenaEditorListener(this), this);
+        registered++;
         pm.registerEvents(new ArenaEditorQuitListener(this), this);
-        
-        // Party system listener
+        registered++;
+
         pm.registerEvents(new PartyPlayerListener(partyManager), this);
-        
-        // Global GUI lock (only for explicitly locked inventories)
+        registered++;
         pm.registerEvents(new GuiLockListener(), this);
-        
-        // Kit GUI listener
+        registered++;
         pm.registerEvents(new KitGUIListener(this), this);
-        
-        getLogger().info("Registered 10 event listeners");
+        registered++;
+
+        getLogger().info("[Bootstrap] Registered " + registered + " listeners");
     }
 
     /**
