@@ -1,0 +1,603 @@
+﻿[ERROR] COMPILATION ERROR : 
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/xDuels.java:[31,14] class XDuels is public, should be declared in a file named XDuels.java
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelSettings.java:[3,24] package tech.xanthia.kit does not exist
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelSettings.java:[70,25] cannot find symbol
+  symbol:   class Kit
+  location: class tech.xanthia.duel.DuelSettings
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelSettings.java:[120,25] cannot find symbol
+  symbol:   class Kit
+  location: class tech.xanthia.duel.DuelSettings
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[77,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[82,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[89,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[96,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[128,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[148,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[154,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[160,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[223,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[289,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[452,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[638,27] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/xDuels.java:[83,28] constructor QueueManager in class tech.xanthia.queue.QueueManager cannot be applied to given types;
+  required: tech.xanthia.XDuels,tech.xanthia.party.PartyManager
+  found:    tech.xanthia.XDuels,tech.xanthia.party.PartyManager,tech.xanthia.duel.DuelManager
+  reason: actual and formal argument lists differ in length
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/xDuels.java:[84,25] cannot find symbol
+  symbol:   method initialize()
+  location: variable queueManager of type tech.xanthia.queue.QueueManager
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/xDuels.java:[112,29] cannot find symbol
+  symbol:   method shutdown()
+  location: variable queueManager of type tech.xanthia.queue.QueueManager
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[72,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[102,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[105,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[119,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[125,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[133,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[178,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[219,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[90,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[101,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[118,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[147,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[326,41] cannot find symbol
+  symbol:   method getMainConfig()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[339,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[364,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[381,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[397,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[439,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[465,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[513,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[566,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[591,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[632,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[675,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[55,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[64,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[72,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[79,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[84,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[178,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[197,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[214,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/queue/QueueManager.java:[119,14] cannot find symbol
+  symbol:   method setState(tech.xanthia.party.PartyState)
+  location: variable party of type tech.xanthia.party.Party
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/queue/QueueManager.java:[185,22] cannot find symbol
+  symbol:   method setState(tech.xanthia.party.PartyState)
+  location: variable party of type tech.xanthia.party.Party
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[149,35] cannot find symbol
+  symbol:   method reserveArena(java.lang.String)
+  location: variable arenaManager of type tech.xanthia.arena.ArenaManager
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[177,41] cannot find symbol
+  symbol:   method getName()
+  location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[312,26] <anonymous tech.xanthia.duel.DuelManager$1> is not abstract and does not override abstract method cancel() in org.bukkit.scheduler.BukkitTask
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[315,13] method does not override or implement a method from a supertype
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[323,42] no suitable method found for runTaskLater(org.bukkit.plugin.java.JavaPlugin,<anonymous org.bukkit.scheduler.BukkitTask>,long)
+    method org.bukkit.scheduler.BukkitScheduler.runTaskLater(org.bukkit.plugin.Plugin,java.lang.Runnable,long) is not applicable
+      (argument mismatch; <anonymous org.bukkit.scheduler.BukkitTask> cannot be converted to java.lang.Runnable)
+    method org.bukkit.scheduler.BukkitScheduler.runTaskLater(org.bukkit.plugin.Plugin,java.util.function.Consumer<? super org.bukkit.scheduler.BukkitTask>,long) is not applicable
+      (argument mismatch; <anonymous org.bukkit.scheduler.BukkitTask> cannot be converted to java.util.function.Consumer<? super org.bukkit.scheduler.BukkitTask>)
+    method org.bukkit.scheduler.BukkitScheduler.runTaskLater(org.bukkit.plugin.Plugin,org.bukkit.scheduler.BukkitRunnable,long) is not applicable
+      (argument mismatch; <anonymous org.bukkit.scheduler.BukkitTask> cannot be converted to org.bukkit.scheduler.BukkitRunnable)
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[497,21] cannot find symbol
+  symbol:   method releaseArena(tech.xanthia.arena.Arena)
+  location: variable arenaManager of type tech.xanthia.arena.ArenaManager
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelSpectatorManager.java:[222,48] cannot find symbol
+  symbol:   method getCenter()
+  location: class tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[108,33] cannot find symbol
+  symbol:   method getBoundingBox()
+  location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[136,36] cannot find symbol
+  symbol:   method getName()
+  location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[148,45] cannot find symbol
+  symbol:   method getSpawn1()
+  location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[148,65] cannot find symbol
+  symbol:   method getSpawn2()
+  location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[485,35] cannot find symbol
+  symbol:   method getName()
+  location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitAttributeSet.java:[119,72] cannot find symbol
+  symbol:   variable GENERIC_SCALE
+  location: class org.bukkit.attribute.Attribute
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitAttributeSet.java:[159,72] cannot find symbol
+  symbol:   variable GENERIC_SCALE
+  location: class org.bukkit.attribute.Attribute
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[44,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[65,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[73,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[75,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[79,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[101,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[103,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[105,18] cannot find symbol
+  symbol:   method getAsyncExecutor()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[126,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[128,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[152,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[154,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[156,18] cannot find symbol
+  symbol:   method getAsyncExecutor()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[179,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[181,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[203,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[205,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[207,18] cannot find symbol
+  symbol:   method getAsyncExecutor()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitValidator.java:[137,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[68,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[73,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[77,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[104,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[115,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[119,15] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[140,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[162,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[164,19] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[180,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[182,23] cannot find symbol
+  symbol:   method getLoggerAdapter()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[198,73] cannot find symbol
+  symbol:   method getAsyncExecutor()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[208,78] cannot find symbol
+  symbol:   method getAsyncExecutor()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[218,77] cannot find symbol
+  symbol:   method getAsyncExecutor()
+  location: variable plugin of type tech.xanthia.XDuels
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project xDuels: Compilation failure: Compilation failure: 
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/xDuels.java:[31,14] class XDuels is public, should be declared in a file named XDuels.java
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelSettings.java:[3,24] package tech.xanthia.kit does not exist
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelSettings.java:[70,25] cannot find symbol
+[ERROR]   symbol:   class Kit
+[ERROR]   location: class tech.xanthia.duel.DuelSettings
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelSettings.java:[120,25] cannot find symbol
+[ERROR]   symbol:   class Kit
+[ERROR]   location: class tech.xanthia.duel.DuelSettings
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[77,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[82,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[89,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[96,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[128,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[148,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[154,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[160,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[223,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[289,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[452,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/party/PartyManager.java:[638,27] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/xDuels.java:[83,28] constructor QueueManager in class tech.xanthia.queue.QueueManager cannot be applied to given types;
+[ERROR]   required: tech.xanthia.XDuels,tech.xanthia.party.PartyManager
+[ERROR]   found:    tech.xanthia.XDuels,tech.xanthia.party.PartyManager,tech.xanthia.duel.DuelManager
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/xDuels.java:[84,25] cannot find symbol
+[ERROR]   symbol:   method initialize()
+[ERROR]   location: variable queueManager of type tech.xanthia.queue.QueueManager
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/xDuels.java:[112,29] cannot find symbol
+[ERROR]   symbol:   method shutdown()
+[ERROR]   location: variable queueManager of type tech.xanthia.queue.QueueManager
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[72,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[102,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[105,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[119,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[125,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[133,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[178,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaRegenerationManager.java:[219,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[90,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[101,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[118,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[147,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[326,41] cannot find symbol
+[ERROR]   symbol:   method getMainConfig()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[339,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[364,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[381,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[397,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[439,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[465,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[513,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[566,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[591,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[632,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaManager.java:[675,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[55,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[64,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[72,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[79,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[84,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[178,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[197,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitManager.java:[214,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/queue/QueueManager.java:[119,14] cannot find symbol
+[ERROR]   symbol:   method setState(tech.xanthia.party.PartyState)
+[ERROR]   location: variable party of type tech.xanthia.party.Party
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/queue/QueueManager.java:[185,22] cannot find symbol
+[ERROR]   symbol:   method setState(tech.xanthia.party.PartyState)
+[ERROR]   location: variable party of type tech.xanthia.party.Party
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[149,35] cannot find symbol
+[ERROR]   symbol:   method reserveArena(java.lang.String)
+[ERROR]   location: variable arenaManager of type tech.xanthia.arena.ArenaManager
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[177,41] cannot find symbol
+[ERROR]   symbol:   method getName()
+[ERROR]   location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[312,26] <anonymous tech.xanthia.duel.DuelManager$1> is not abstract and does not override abstract method cancel() in org.bukkit.scheduler.BukkitTask
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[315,13] method does not override or implement a method from a supertype
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[323,42] no suitable method found for runTaskLater(org.bukkit.plugin.java.JavaPlugin,<anonymous org.bukkit.scheduler.BukkitTask>,long)
+[ERROR]     method org.bukkit.scheduler.BukkitScheduler.runTaskLater(org.bukkit.plugin.Plugin,java.lang.Runnable,long) is not applicable
+[ERROR]       (argument mismatch; <anonymous org.bukkit.scheduler.BukkitTask> cannot be converted to java.lang.Runnable)
+[ERROR]     method org.bukkit.scheduler.BukkitScheduler.runTaskLater(org.bukkit.plugin.Plugin,java.util.function.Consumer<? super org.bukkit.scheduler.BukkitTask>,long) is not applicable
+[ERROR]       (argument mismatch; <anonymous org.bukkit.scheduler.BukkitTask> cannot be converted to java.util.function.Consumer<? super org.bukkit.scheduler.BukkitTask>)
+[ERROR]     method org.bukkit.scheduler.BukkitScheduler.runTaskLater(org.bukkit.plugin.Plugin,org.bukkit.scheduler.BukkitRunnable,long) is not applicable
+[ERROR]       (argument mismatch; <anonymous org.bukkit.scheduler.BukkitTask> cannot be converted to org.bukkit.scheduler.BukkitRunnable)
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelManager.java:[497,21] cannot find symbol
+[ERROR]   symbol:   method releaseArena(tech.xanthia.arena.Arena)
+[ERROR]   location: variable arenaManager of type tech.xanthia.arena.ArenaManager
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelSpectatorManager.java:[222,48] cannot find symbol
+[ERROR]   symbol:   method getCenter()
+[ERROR]   location: class tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[108,33] cannot find symbol
+[ERROR]   symbol:   method getBoundingBox()
+[ERROR]   location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[136,36] cannot find symbol
+[ERROR]   symbol:   method getName()
+[ERROR]   location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[148,45] cannot find symbol
+[ERROR]   symbol:   method getSpawn1()
+[ERROR]   location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[148,65] cannot find symbol
+[ERROR]   symbol:   method getSpawn2()
+[ERROR]   location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/duel/DuelInstance.java:[485,35] cannot find symbol
+[ERROR]   symbol:   method getName()
+[ERROR]   location: variable arena of type tech.xanthia.arena.Arena
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitAttributeSet.java:[119,72] cannot find symbol
+[ERROR]   symbol:   variable GENERIC_SCALE
+[ERROR]   location: class org.bukkit.attribute.Attribute
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitAttributeSet.java:[159,72] cannot find symbol
+[ERROR]   symbol:   variable GENERIC_SCALE
+[ERROR]   location: class org.bukkit.attribute.Attribute
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[44,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[65,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[73,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[75,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[79,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[101,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[103,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[105,18] cannot find symbol
+[ERROR]   symbol:   method getAsyncExecutor()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[126,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[128,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[152,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[154,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[156,18] cannot find symbol
+[ERROR]   symbol:   method getAsyncExecutor()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[179,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[181,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[203,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[205,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitStorage.java:[207,18] cannot find symbol
+[ERROR]   symbol:   method getAsyncExecutor()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/kits/KitValidator.java:[137,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[68,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[73,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[77,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[104,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[115,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[119,15] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[140,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[162,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[164,19] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[180,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[182,23] cannot find symbol
+[ERROR]   symbol:   method getLoggerAdapter()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[198,73] cannot find symbol
+[ERROR]   symbol:   method getAsyncExecutor()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[208,78] cannot find symbol
+[ERROR]   symbol:   method getAsyncExecutor()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] /D:/Code/xDuels/src/main/java/tech/xanthia/arena/ArenaStorage.java:[218,77] cannot find symbol
+[ERROR]   symbol:   method getAsyncExecutor()
+[ERROR]   location: variable plugin of type tech.xanthia.XDuels
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -1,0 +1,828 @@
+package tech.xanthia;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandMap;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
+import tech.xanthia.commands.*;
+import tech.xanthia.config.*;
+import tech.xanthia.database.DatabaseManager;
+import tech.xanthia.database.dao.ELODao;
+import tech.xanthia.listeners.*;
+import tech.xanthia.managers.*;
+import tech.xanthia.papi.XDuelsExpansion;
+import tech.xanthia.utils.LoggerAdapter;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * XDuels - Advanced 1v1 Dueling Plugin for Minecraft Paper 1.20.2+
+ * 
+ * This class serves as the central kernel of the plugin, responsible for:
+ * - Bootstrapping all subsystems in strict order
+ * - Registering commands and listeners
+ * - Loading configurations and initializing managers
+ * - Performing integrity checks on arenas, kits, and parties
+ * - Controlling graceful shutdown sequences
+ * 
+ * Architecture follows SOLID principles with strong OOP design.
+ * Each subsystem has its own Manager, Storage Handler, API Interface, and Listener.
+ * 
+ * @author Xanthia
+ * @version 1.0.0-SNAPSHOT
+ * @since 1.0.0
+ */
+public final class XDuels extends JavaPlugin {
+    
+    // ========================================
+    // STATIC INSTANCE
+    // ========================================
+    
+    private static XDuels instance;
+    
+    /**
+     * Gets the singleton instance of the plugin.
+     * 
+     * @return XDuels plugin instance
+     */
+    public static XDuels getInstance() {
+        return instance;
+    }
+    
+    // ========================================
+    // CORE COMPONENTS
+    // ========================================
+    
+    // Logger
+    private LoggerAdapter loggerAdapter;
+    
+    // Configuration Loaders
+    private MainConfig mainConfig;
+    private ArenasConfig arenasConfig;
+    private KitsConfig kitsConfig;
+    private SignsConfig signsConfig;
+    private LobbyConfig lobbyConfig;
+    private TrimsConfig trimsConfig;
+    private MessagesConfig messagesConfig;
+    
+    // Database
+    private DatabaseManager databaseManager;
+    private ExecutorService asyncExecutor;
+    private ELODao eloDao;
+    
+    // Core Managers
+    private ArenaManager arenaManager;
+    private KitManager kitManager;
+    private PartyManager partyManager;
+    private QueueManager queueManager;
+    private DuelManager duelManager;
+    private ELOManager eloManager;
+    private SignManager signManager;
+    private LobbyManager lobbyManager;
+    private TrimManager trimManager;
+    private PlayerProfileManager playerProfileManager;
+    private RegenerationManager regenerationManager;
+    private SettingsManager settingsManager;
+    private WorldBorderManager worldBorderManager;
+    
+    // Command System
+    private CommandDispatcher commandDispatcher;
+    
+    // Tasks
+    private final List<BukkitTask> activeTasks = new ArrayList<>();
+    
+    // Runtime metrics
+    private long startupTime;
+    private boolean fullyLoaded = false;
+    
+    // ========================================
+    // PLUGIN LIFECYCLE - ENABLE
+    // ========================================
+    
+    @Override
+    public void onEnable() {
+        final long bootStart = System.currentTimeMillis();
+        instance = this;
+        
+        try {
+            // ═══════════════════════════════════════
+            // PHASE 1: LOGGER ADAPTER
+            // ═══════════════════════════════════════
+            this.loggerAdapter = new LoggerAdapter(this);
+            loggerAdapter.info("════════════════════════════════════════");
+            loggerAdapter.info("  xDuels v" + getDescription().getVersion());
+            loggerAdapter.info("  Java " + System.getProperty("java.version"));
+            loggerAdapter.info("  Paper " + Bukkit.getVersion());
+            loggerAdapter.info("════════════════════════════════════════");
+            
+            // ═══════════════════════════════════════
+            // PHASE 2: CONFIGURATION LOADER
+            // ═══════════════════════════════════════
+            loggerAdapter.info("[ xDuels :: ConfigLoader ] Initializing configurations...");
+            
+            this.mainConfig = new MainConfig(this);
+            this.arenasConfig = new ArenasConfig(this);
+            this.kitsConfig = new KitsConfig(this);
+            this.signsConfig = new SignsConfig(this);
+            this.lobbyConfig = new LobbyConfig(this);
+            this.trimsConfig = new TrimsConfig(this);
+            this.messagesConfig = new MessagesConfig(this);
+            
+            mainConfig.load();
+            arenasConfig.load();
+            kitsConfig.load();
+            signsConfig.load();
+            lobbyConfig.load();
+            trimsConfig.load();
+            messagesConfig.load();
+            
+            loggerAdapter.info("[ xDuels :: ConfigLoader ] Loaded 7 configuration files");
+            
+            // ═══════════════════════════════════════
+            // PHASE 3: DATABASE LOADER (ELO)
+            // ═══════════════════════════════════════
+            loggerAdapter.info("[ xDuels :: DatabaseManager ] Initializing SQLite database...");
+            
+            this.asyncExecutor = Executors.newFixedThreadPool(
+                mainConfig.getDatabaseThreadPoolSize(),
+                r -> {
+                    Thread thread = new Thread(r);
+                    thread.setName("xDuels-AsyncDB-" + thread.getId());
+                    thread.setDaemon(true);
+                    return thread;
+                }
+            );
+            
+            this.databaseManager = new DatabaseManager(this, asyncExecutor);
+            databaseManager.initialize();
+            
+            this.eloDao = new ELODao(databaseManager);
+            
+            loggerAdapter.info("[ xDuels :: DatabaseManager ] Database initialized with " + 
+                mainConfig.getDatabaseThreadPoolSize() + " async threads");
+            
+            // ═══════════════════════════════════════
+            // PHASE 4: CORE MANAGERS
+            // ═══════════════════════════════════════
+            loggerAdapter.info("[ xDuels :: ManagerRegistry ] Initializing core managers...");
+            
+            // Initialize managers in dependency order
+            this.playerProfileManager = new PlayerProfileManager(this);
+            this.lobbyManager = new LobbyManager(this, lobbyConfig);
+            this.trimManager = new TrimManager(this, trimsConfig);
+            this.kitManager = new KitManager(this, kitsConfig);
+            this.regenerationManager = new RegenerationManager(this);
+            this.arenaManager = new ArenaManager(this, arenasConfig, regenerationManager);
+            this.eloManager = new ELOManager(this, eloDao, asyncExecutor);
+            this.signManager = new SignManager(this, signsConfig);
+            this.partyManager = new PartyManager(this);
+            this.settingsManager = new SettingsManager(this);
+            this.worldBorderManager = new WorldBorderManager(this);
+            this.queueManager = new QueueManager(this, arenaManager, kitManager, partyManager);
+            this.duelManager = new DuelManager(this, arenaManager, kitManager, queueManager, 
+                eloManager, worldBorderManager, settingsManager);
+            
+            loggerAdapter.info("[ xDuels :: ManagerRegistry ] 13 managers initialized");
+            
+            // ═══════════════════════════════════════
+            // PHASE 5: EVENT LISTENERS REGISTRATION
+            // ═══════════════════════════════════════
+            loggerAdapter.info("[ xDuels :: ListenerRegistry ] Registering event listeners...");
+            
+            PluginManager pm = getServer().getPluginManager();
+            
+            // Core listeners
+            pm.registerEvents(new PlayerJoinQuitListener(this), this);
+            pm.registerEvents(new PlayerInteractListener(this), this);
+            pm.registerEvents(new BlockListener(this), this);
+            pm.registerEvents(new EntityDamageListener(this), this);
+            pm.registerEvents(new ProjectileListener(this), this);
+            pm.registerEvents(new InventoryListener(this), this);
+            pm.registerEvents(new PartyListener(this), this);
+            pm.registerEvents(new SpectateListener(this), this);
+            pm.registerEvents(new QueueListener(this), this);
+            pm.registerEvents(new SumoListener(this), this);
+            pm.registerEvents(new SpleefListener(this), this);
+            pm.registerEvents(new PlayerDeathListener(this), this);
+            pm.registerEvents(new PlayerRespawnListener(this), this);
+            pm.registerEvents(new FoodLevelChangeListener(this), this);
+            pm.registerEvents(new PlayerDropItemListener(this), this);
+            pm.registerEvents(new PlayerPickupItemListener(this), this);
+            
+            loggerAdapter.info("[ xDuels :: ListenerRegistry ] 16 listeners registered");
+            
+            // ═══════════════════════════════════════
+            // PHASE 6: COMMANDS REGISTRATION
+            // ═══════════════════════════════════════
+            loggerAdapter.info("[ xDuels :: CommandRegistry ] Registering commands...");
+            
+            this.commandDispatcher = new CommandDispatcher(this, messagesConfig);
+            
+            // Root command: /xduels
+            XDuelsCommand xduelsCommand = new XDuelsCommand(this, commandDispatcher);
+            registerCommand("xduels", xduelsCommand);
+            
+            // Subcommands registered within XDuelsCommand:
+            // - /xduels arena
+            // - /xduels kits
+            // - /xduels settings
+            // - /xduels sign
+            // - /xduels stats
+            // - /xduels reload
+            // - /xduels list
+            
+            // Party commands
+            PartyCommand partyCommand = new PartyCommand(this, partyManager, commandDispatcher);
+            registerCommand("party", partyCommand);
+            registerCommand("xparty", partyCommand);
+            
+            // Spectate command
+            SpectateCommand spectateCommand = new SpectateCommand(this, duelManager, commandDispatcher);
+            registerCommand("spectate", spectateCommand);
+            
+            // Forfeit commands
+            ForfeitCommand forfeitCommand = new ForfeitCommand(this, duelManager, commandDispatcher);
+            registerCommand("ff", forfeitCommand);
+            registerCommand("forfeit", forfeitCommand);
+            
+            loggerAdapter.info("[ xDuels :: CommandRegistry ] Registered 6 commands with tab completion");
+            
+            // ═══════════════════════════════════════
+            // PHASE 7: PLACEHOLDERAPI EXPANSION
+            // ═══════════════════════════════════════
+            if (pm.getPlugin("PlaceholderAPI") != null) {
+                loggerAdapter.info("[ xDuels :: PlaceholderAPI ] Registering expansion...");
+                
+                XDuelsExpansion expansion = new XDuelsExpansion(this);
+                expansion.register();
+                
+                loggerAdapter.info("[ xDuels :: PlaceholderAPI ] Expansion registered successfully");
+            } else {
+                loggerAdapter.warn("[ xDuels :: PlaceholderAPI ] Not found - placeholder support disabled");
+            }
+            
+            // ═══════════════════════════════════════
+            // PHASE 8: WORLD BORDER API INITIALIZATION
+            // ═══════════════════════════════════════
+            loggerAdapter.info("[ xDuels :: WorldBorderAPI ] Initializing client-side border controller...");
+            worldBorderManager.initialize();
+            loggerAdapter.info("[ xDuels :: WorldBorderAPI ] Border controller ready");
+            
+            // ═══════════════════════════════════════
+            // PHASE 9: SAFETY & INTEGRITY VALIDATION
+            // ═══════════════════════════════════════
+            performIntegrityChecks();
+            
+            // ═══════════════════════════════════════
+            // PHASE 10: CACHE WARMING
+            // ═══════════════════════════════════════
+            loggerAdapter.info("[ xDuels :: CacheWarmer ] Preloading data into memory...");
+            
+            arenaManager.warmCache();
+            kitManager.warmCache();
+            trimManager.warmCache();
+            signManager.warmCache();
+            eloManager.warmCache();
+            
+            loggerAdapter.info("[ xDuels :: CacheWarmer ] Cache warming complete");
+            
+            // ═══════════════════════════════════════
+            // PHASE 11: RUNTIME TASKS
+            // ═══════════════════════════════════════
+            startRuntimeTasks();
+            
+            // ═══════════════════════════════════════
+            // BOOT COMPLETE
+            // ═══════════════════════════════════════
+            this.startupTime = System.currentTimeMillis() - bootStart;
+            this.fullyLoaded = true;
+            
+            loggerAdapter.info("════════════════════════════════════════");
+            loggerAdapter.info("  ✓ Boot complete in " + startupTime + "ms");
+            loggerAdapter.info("════════════════════════════════════════");
+            
+        } catch (Exception e) {
+            loggerAdapter.severe("════════════════════════════════════════");
+            loggerAdapter.severe("  ✗ FATAL ERROR DURING STARTUP");
+            loggerAdapter.severe("════════════════════════════════════════");
+            loggerAdapter.severe("Error: " + e.getMessage());
+            e.printStackTrace();
+            loggerAdapter.severe("Plugin will be disabled.");
+            getServer().getPluginManager().disablePlugin(this);
+        }
+    }
+    
+    // ========================================
+    // PLUGIN LIFECYCLE - DISABLE
+    // ========================================
+    
+    @Override
+    public void onDisable() {
+        if (!fullyLoaded) {
+            loggerAdapter.warn("Plugin was not fully loaded - skipping graceful shutdown");
+            return;
+        }
+        
+        loggerAdapter.info("════════════════════════════════════════");
+        loggerAdapter.info("  Initiating graceful shutdown...");
+        loggerAdapter.info("════════════════════════════════════════");
+        
+        try {
+            // 1. Cancel all schedulers
+            loggerAdapter.info("[ xDuels :: Shutdown ] Cancelling " + activeTasks.size() + " active tasks...");
+            for (BukkitTask task : activeTasks) {
+                if (task != null && !task.isCancelled()) {
+                    task.cancel();
+                }
+            }
+            activeTasks.clear();
+            
+            // 2. End all active duels
+            loggerAdapter.info("[ xDuels :: Shutdown ] Ending active duels...");
+            if (duelManager != null) {
+                int activeDuels = duelManager.endAllDuelsGracefully(false); // Don't save stats
+                loggerAdapter.info("[ xDuels :: Shutdown ] Ended " + activeDuels + " active duels");
+            }
+            
+            // 3. Clear all queues and teleport to lobby
+            loggerAdapter.info("[ xDuels :: Shutdown ] Clearing queues...");
+            if (queueManager != null) {
+                queueManager.clearAllQueues();
+            }
+            
+            // 4. Teleport all players to lobby
+            loggerAdapter.info("[ xDuels :: Shutdown ] Teleporting players to lobby...");
+            if (lobbyManager != null && lobbyManager.getLobbyLocation() != null) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.teleport(lobbyManager.getLobbyLocation());
+                }
+            }
+            
+            // 5. Remove all client-side world borders
+            loggerAdapter.info("[ xDuels :: Shutdown ] Removing world borders...");
+            if (worldBorderManager != null) {
+                worldBorderManager.removeAllBorders();
+            }
+            
+            // 6. Save all player statistics
+            loggerAdapter.info("[ xDuels :: Shutdown ] Saving player statistics...");
+            if (playerProfileManager != null) {
+                int savedProfiles = playerProfileManager.saveAllProfiles();
+                loggerAdapter.info("[ xDuels :: Shutdown ] Saved " + savedProfiles + " player profiles");
+            }
+            
+            // 7. Flush SQL queues and close database
+            loggerAdapter.info("[ xDuels :: Shutdown ] Flushing database queues...");
+            if (eloManager != null) {
+                eloManager.flushAllPendingUpdates();
+            }
+            
+            // 8. Save all configurations
+            loggerAdapter.info("[ xDuels :: Shutdown ] Saving configurations...");
+            if (arenasConfig != null) arenasConfig.save();
+            if (kitsConfig != null) kitsConfig.save();
+            if (signsConfig != null) signsConfig.save();
+            if (lobbyConfig != null) lobbyConfig.save();
+            if (trimsConfig != null) trimsConfig.save();
+            
+            // 9. Close database connection
+            if (databaseManager != null) {
+                loggerAdapter.info("[ xDuels :: Shutdown ] Closing database connection...");
+                databaseManager.close();
+            }
+            
+            // 10. Shutdown async executor
+            if (asyncExecutor != null && !asyncExecutor.isShutdown()) {
+                loggerAdapter.info("[ xDuels :: Shutdown ] Shutting down async executor...");
+                asyncExecutor.shutdown();
+                try {
+                    if (!asyncExecutor.awaitTermination(5, TimeUnit.SECONDS)) {
+                        asyncExecutor.shutdownNow();
+                    }
+                } catch (InterruptedException e) {
+                    asyncExecutor.shutdownNow();
+                    Thread.currentThread().interrupt();
+                }
+            }
+            
+            // 11. Unregister PlaceholderAPI expansion
+            if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+                loggerAdapter.info("[ xDuels :: Shutdown ] Unregistering PlaceholderAPI expansion...");
+                // Expansion will auto-unregister on plugin disable
+            }
+            
+            loggerAdapter.info("════════════════════════════════════════");
+            loggerAdapter.info("  ✓ Graceful shutdown complete");
+            loggerAdapter.info("════════════════════════════════════════");
+            
+        } catch (Exception e) {
+            loggerAdapter.severe("Error during shutdown: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            instance = null;
+        }
+    }
+    
+    // ========================================
+    // INTEGRITY CHECKS
+    // ========================================
+    
+    /**
+     * Performs strict validation on all subsystems during startup.
+     * Validates arenas, kits, parties, and other critical components.
+     */
+    private void performIntegrityChecks() {
+        loggerAdapter.info("[ xDuels :: IntegrityCheck ] Running validation checks...");
+        
+        int totalIssues = 0;
+        
+        // Arena Validation
+        if (arenaManager != null) {
+            ArenaValidationResult arenaResult = arenaManager.validateAllArenas();
+            loggerAdapter.info("[ xDuels :: IntegrityCheck ] Arenas: " + 
+                arenaResult.getValidCount() + " valid, " + 
+                arenaResult.getInvalidCount() + " invalid, " +
+                arenaResult.getDisabledCount() + " disabled");
+            
+            if (arenaResult.hasErrors()) {
+                for (String error : arenaResult.getErrors()) {
+                    loggerAdapter.warn("  └─ " + error);
+                }
+                totalIssues += arenaResult.getInvalidCount();
+            }
+        }
+        
+        // Kit Validation
+        if (kitManager != null) {
+            KitValidationResult kitResult = kitManager.validateAllKits();
+            loggerAdapter.info("[ xDuels :: IntegrityCheck ] Kits: " + 
+                kitResult.getValidCount() + " valid, " + 
+                kitResult.getInvalidCount() + " invalid");
+            
+            if (kitResult.hasErrors()) {
+                for (String error : kitResult.getErrors()) {
+                    loggerAdapter.warn("  └─ " + error);
+                }
+                totalIssues += kitResult.getInvalidCount();
+            }
+        }
+        
+        // Party System Validation
+        if (partyManager != null) {
+            int ghostParties = partyManager.cleanupGhostParties();
+            if (ghostParties > 0) {
+                loggerAdapter.info("[ xDuels :: IntegrityCheck ] Cleaned up " + ghostParties + " ghost parties");
+            } else {
+                loggerAdapter.info("[ xDuels :: IntegrityCheck ] Party system: clean");
+            }
+        }
+        
+        // Sign Validation
+        if (signManager != null) {
+            SignValidationResult signResult = signManager.validateAllSigns();
+            loggerAdapter.info("[ xDuels :: IntegrityCheck ] Signs: " + 
+                signResult.getValidCount() + " valid, " + 
+                signResult.getInvalidCount() + " invalid");
+            
+            if (signResult.hasErrors()) {
+                for (String error : signResult.getErrors()) {
+                    loggerAdapter.warn("  └─ " + error);
+                }
+                totalIssues += signResult.getInvalidCount();
+            }
+        }
+        
+        if (totalIssues == 0) {
+            loggerAdapter.info("[ xDuels :: IntegrityCheck ] ✓ All systems validated successfully");
+        } else {
+            loggerAdapter.warn("[ xDuels :: IntegrityCheck ] ⚠ Found " + totalIssues + " issues (non-fatal)");
+        }
+    }
+    
+    // ========================================
+    // RUNTIME TASKS
+    // ========================================
+    
+    /**
+     * Starts all recurring tasks for runtime operations.
+     * Includes both async and sync schedulers.
+     */
+    private void startRuntimeTasks() {
+        loggerAdapter.info("[ xDuels :: Scheduler ] Starting runtime tasks...");
+        
+        // ASYNC: Queue processing (every 2 ticks = 100ms)
+        BukkitTask queueTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+            try {
+                if (queueManager != null) {
+                    queueManager.processQueues();
+                }
+            } catch (Exception e) {
+                loggerAdapter.error("[ xDuels :: QueueProcessor ] Error: " + e.getMessage());
+            }
+        }, 20L, 2L);
+        activeTasks.add(queueTask);
+        
+        // ASYNC: ELO flush scheduler (every 5 minutes)
+        BukkitTask eloFlushTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+            try {
+                if (eloManager != null) {
+                    eloManager.flushPendingUpdates();
+                }
+            } catch (Exception e) {
+                loggerAdapter.error("[ xDuels :: ELOFlusher ] Error: " + e.getMessage());
+            }
+        }, 6000L, 6000L);
+        activeTasks.add(eloFlushTask);
+        
+        // ASYNC: Spectator cleanup (every 30 seconds)
+        BukkitTask spectatorTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+            try {
+                if (duelManager != null) {
+                    duelManager.cleanupInvalidSpectators();
+                }
+            } catch (Exception e) {
+                loggerAdapter.error("[ xDuels :: SpectatorCleaner ] Error: " + e.getMessage());
+            }
+        }, 600L, 600L);
+        activeTasks.add(spectatorTask);
+        
+        // ASYNC: Auto-rollback detection (every minute)
+        BukkitTask rollbackTask = Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+            try {
+                if (arenaManager != null && regenerationManager != null) {
+                    arenaManager.detectAndResetStaleArenas();
+                }
+            } catch (Exception e) {
+                loggerAdapter.error("[ xDuels :: AutoRollback ] Error: " + e.getMessage());
+            }
+        }, 1200L, 1200L);
+        activeTasks.add(rollbackTask);
+        
+        // SYNC: Dynamic health indicators (every tick)
+        BukkitTask healthTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
+            try {
+                if (duelManager != null) {
+                    duelManager.updateHealthIndicators();
+                }
+            } catch (Exception e) {
+                loggerAdapter.error("[ xDuels :: HealthUpdater ] Error: " + e.getMessage());
+            }
+        }, 1L, 1L);
+        activeTasks.add(healthTask);
+        
+        // SYNC: Round timers (every tick)
+        BukkitTask roundTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
+            try {
+                if (duelManager != null) {
+                    duelManager.processRoundTimers();
+                }
+            } catch (Exception e) {
+                loggerAdapter.error("[ xDuels :: RoundTimer ] Error: " + e.getMessage());
+            }
+        }, 1L, 1L);
+        activeTasks.add(roundTask);
+        
+        // SYNC: KBSync tick update (every tick)
+        BukkitTask kbSyncTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
+            try {
+                if (duelManager != null) {
+                    duelManager.updateKnockbackSync();
+                }
+            } catch (Exception e) {
+                loggerAdapter.error("[ xDuels :: KBSync ] Error: " + e.getMessage());
+            }
+        }, 1L, 1L);
+        activeTasks.add(kbSyncTask);
+        
+        loggerAdapter.info("[ xDuels :: Scheduler ] Started " + activeTasks.size() + " runtime tasks");
+    }
+    
+    // ========================================
+    // RELOAD SYSTEM
+    // ========================================
+    
+    /**
+     * Reloads all plugin configurations and managers.
+     * IMPORTANT: Ends all active duels without saving stats.
+     * 
+     * @param sender The command sender initiating the reload
+     * @return true if reload was successful, false otherwise
+     */
+    public boolean reload(CommandSender sender) {
+        try {
+            loggerAdapter.info("[ xDuels :: Reload ] Initiated by " + sender.getName());
+            
+            // 1. End all active duels
+            if (duelManager != null) {
+                int ended = duelManager.endAllDuelsGracefully(false);
+                loggerAdapter.info("[ xDuels :: Reload ] Ended " + ended + " active duels");
+            }
+            
+            // 2. Clear queues
+            if (queueManager != null) {
+                queueManager.clearAllQueues();
+            }
+            
+            // 3. Teleport all players to lobby
+            if (lobbyManager != null && lobbyManager.getLobbyLocation() != null) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    if (!player.hasPermission("xduels.admin")) {
+                        player.teleport(lobbyManager.getLobbyLocation());
+                    }
+                }
+            }
+            
+            // 4. Reload all configurations
+            mainConfig.reload();
+            arenasConfig.reload();
+            kitsConfig.reload();
+            signsConfig.reload();
+            lobbyConfig.reload();
+            trimsConfig.reload();
+            messagesConfig.reload();
+            
+            // 5. Reinitialize managers
+            arenaManager.reload();
+            kitManager.reload();
+            signManager.reload();
+            lobbyManager.reload();
+            trimManager.reload();
+            
+            // 6. Re-validate everything
+            performIntegrityChecks();
+            
+            // 7. Rebuild PAPI placeholders
+            if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+                // PAPI will automatically update on next request
+                loggerAdapter.info("[ xDuels :: Reload ] PlaceholderAPI will refresh on next use");
+            }
+            
+            loggerAdapter.info("[ xDuels :: Reload ] ✓ Reload complete");
+            return true;
+            
+        } catch (Exception e) {
+            loggerAdapter.severe("[ xDuels :: Reload ] ✗ Error during reload: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    // ========================================
+    // COMMAND REGISTRATION HELPER
+    // ========================================
+    
+    /**
+     * Registers a command using reflection to access the CommandMap.
+     * 
+     * @param name Command name
+     * @param command Command instance
+     */
+    private void registerCommand(String name, Command command) {
+        try {
+            Field commandMapField = Bukkit.getServer().getClass().getDeclaredField("commandMap");
+            commandMapField.setAccessible(true);
+            CommandMap commandMap = (CommandMap) commandMapField.get(Bukkit.getServer());
+            commandMap.register("xduels", command);
+        } catch (Exception e) {
+            loggerAdapter.error("Failed to register command: " + name);
+            e.printStackTrace();
+        }
+    }
+    
+    // ========================================
+    // GETTERS - CONFIGURATION
+    // ========================================
+    
+    public MainConfig getMainConfig() {
+        return mainConfig;
+    }
+    
+    public ArenasConfig getArenasConfig() {
+        return arenasConfig;
+    }
+    
+    public KitsConfig getKitsConfig() {
+        return kitsConfig;
+    }
+    
+    public SignsConfig getSignsConfig() {
+        return signsConfig;
+    }
+    
+    public LobbyConfig getLobbyConfig() {
+        return lobbyConfig;
+    }
+    
+    public TrimsConfig getTrimsConfig() {
+        return trimsConfig;
+    }
+    
+    public MessagesConfig getMessagesConfig() {
+        return messagesConfig;
+    }
+    
+    // ========================================
+    // GETTERS - DATABASE
+    // ========================================
+    
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
+    
+    public ExecutorService getAsyncExecutor() {
+        return asyncExecutor;
+    }
+    
+    public ELODao getELODao() {
+        return eloDao;
+    }
+    
+    // ========================================
+    // GETTERS - MANAGERS
+    // ========================================
+    
+    public ArenaManager getArenaManager() {
+        return arenaManager;
+    }
+    
+    public KitManager getKitManager() {
+        return kitManager;
+    }
+    
+    public PartyManager getPartyManager() {
+        return partyManager;
+    }
+    
+    public QueueManager getQueueManager() {
+        return queueManager;
+    }
+    
+    public DuelManager getDuelManager() {
+        return duelManager;
+    }
+    
+    public ELOManager getELOManager() {
+        return eloManager;
+    }
+    
+    public SignManager getSignManager() {
+        return signManager;
+    }
+    
+    public LobbyManager getLobbyManager() {
+        return lobbyManager;
+    }
+    
+    public TrimManager getTrimManager() {
+        return trimManager;
+    }
+    
+    public PlayerProfileManager getPlayerProfileManager() {
+        return playerProfileManager;
+    }
+    
+    public RegenerationManager getRegenerationManager() {
+        return regenerationManager;
+    }
+    
+    public SettingsManager getSettingsManager() {
+        return settingsManager;
+    }
+    
+    public WorldBorderManager getWorldBorderManager() {
+        return worldBorderManager;
+    }
+    
+    // ========================================
+    // GETTERS - UTILITIES
+    // ========================================
+    
+    public LoggerAdapter getLoggerAdapter() {
+        return loggerAdapter;
+    }
+    
+    public CommandDispatcher getCommandDispatcher() {
+        return commandDispatcher;
+    }
+    
+    // ========================================
+    // GETTERS - METRICS
+    // ========================================
+    
+    public long getStartupTime() {
+        return startupTime;
+    }
+    
+    public boolean isFullyLoaded() {
+        return fullyLoaded;
+    }
+}

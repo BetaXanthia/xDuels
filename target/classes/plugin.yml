@@ -1,0 +1,74 @@
+name: xDuels
+version: 1.0.0-SNAPSHOT
+main: tech.xanthia.XDuels
+api-version: 1.20
+author: Xanthia
+description: Advanced Dueling Plugin for Minecraft Paper
+website: https://example.com
+
+commands:
+  duel:
+    description: Challenge a player to a duel
+    usage: /<command> <player> <kit>
+    aliases: [challenge, 1v1]
+  
+  stats:
+    description: View duel statistics
+    usage: /<command> [player]
+    aliases: [statistics, duels]
+  
+  spectate:
+    description: Spectate a duel
+    usage: /<command> <player>
+    aliases: [spec, watch]
+  
+  party:
+    description: Party management commands
+    usage: /<command> <subcommand> [args]
+    aliases: [p]
+  
+  queue:
+    description: Queue for duels
+    usage: /<command> <join|leave|status> [kit]
+    aliases: [q]
+  
+  arena:
+    description: Arena management commands
+    usage: /<command> <subcommand> [args]
+    permission: xduels.admin
+  
+  kit:
+    description: Kit management commands
+    usage: /<command> <subcommand> [args]
+    permission: xduels.admin
+
+permissions:
+  xduels.*:
+    description: Gives access to all xDuels permissions
+    default: op
+    children:
+      xduels.admin: true
+      xduels.duel: true
+      xduels.party: true
+      xduels.spectate: true
+      xduels.stats: true
+  
+  xduels.admin:
+    description: Administrator permissions
+    default: op
+  
+  xduels.duel:
+    description: Allows using duel commands
+    default: true
+  
+  xduels.party:
+    description: Allows using party commands
+    default: true
+  
+  xduels.spectate:
+    description: Allows spectating duels
+    default: true
+  
+  xduels.stats:
+    description: Allows viewing statistics
+    default: true

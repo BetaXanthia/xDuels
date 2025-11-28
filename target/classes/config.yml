@@ -1,0 +1,75 @@
+# xDuels Configuration File
+# Advanced Dueling Plugin for Minecraft Paper
+# Version: 1.0.0
+
+# Duel Engine Settings
+duel:
+  # Lobby spawn (where players return after duel)
+  lobby:
+    world: world
+    x: 0.5
+    y: 64.0
+    z: 0.5
+    yaw: 0.0
+    pitch: 0.0
+  
+  # Cleanup settings
+  cleanup-interval-ticks: 600  # 30 seconds
+  disconnect-grace-period-ms: 60000  # 60 seconds
+  
+  # Spectator settings
+  spectator:
+    enabled: true
+    max-per-duel: 20
+    allow-chat: false
+  
+  # Stats settings
+  stats:
+    auto-save-interval-ticks: 6000  # 5 minutes
+    enable-leaderboards: true
+  
+  # ELO settings
+  elo:
+    starting-rating: 1000
+    k-factor-beginner: 40
+    k-factor-intermediate: 32
+    k-factor-advanced: 24
+    k-factor-master: 16
+
+# Party System Settings
+party:
+  max-size: 10
+  invite-expire-seconds: 60
+  cleanup-interval-ticks: 600
+  offline-kick-minutes: 5
+  public-parties-enabled: true
+  chat-enabled: true
+
+# Queue System Settings
+queue:
+  matchmaking-interval-ticks: 40  # 2 seconds
+  elo-range-base: 100
+  elo-range-increment: 50
+  elo-range-max: 500
+  queue-timeout-seconds: 300  # 5 minutes
+  
+# Arena System Settings
+arena:
+  auto-regeneration: true
+  regeneration-delay-ticks: 100  # 5 seconds
+  use-schematic: false
+  cooldown-after-duel: 60  # seconds
+
+# Kit System Settings
+kit:
+  default-kit: "nodebuff"
+  enable-custom-kits: true
+  max-custom-kits: 50
+
+# Messages
+messages:
+  prefix: "§8[§6xDuels§8]§r "
+  duel-start: "§aDuel starting in..."
+  duel-end: "§aDuel ended!"
+  player-win: "§e{winner} §awon the duel!"
+  stats-saved: "§aYour stats have been saved!"
