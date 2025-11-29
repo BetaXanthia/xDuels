@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/xDuels.iml" filepath="$PROJECT_DIR$/xDuels.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/xDuels.iml" filepath="$PROJECT_DIR$/.idea/xDuels.iml" />
     </modules>
   </component>
 </project>
